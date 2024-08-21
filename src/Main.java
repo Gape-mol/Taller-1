@@ -1,7 +1,10 @@
 /*Durante las clases de C++ en SoloLearn, me mencionaron sobre la Pascal Case y Camel Case para declarar funciones y variables.
 En este caso intenté usar Camel Case, para llevar un orden en el código.*/
 
+//El menu tiene como base el menu que tengo como repositorio en Github
+
 import java.util.Scanner;
+import java.util.Random;
 
 public class Main {
     public static void main(String[] args) {
@@ -9,17 +12,24 @@ public class Main {
     }
 
     public static void menu() {
+        String[][] cartas = crearMatrizCartas();
+        //mostrarCartas(cartas);
         boolean continuar = true;
         while(continuar){
         printMenu(); //Primero se imprime el menu
         int opcion = readOption(); //Se declara una variable de tipo int, y se iguala a la funcion readOption
         switch (opcion) { //Utilizo un switch para las opciones
-            case 1 ->
-                    jugar();
-            case 2 ->
-                    continuar = salir();
-            default -> //En caso de que no se seleccione una opcion valida, creo que no es necesaria debido al do-while en la funcion readOption... Pero lo dejo por si acaso
-                    System.out.println("Opcion no valida");
+            case 1: {
+                jugar(cartas);
+                break;
+            }
+            case 2: {
+                continuar = salir();
+                break;
+            }
+            default: { //En caso de que no se seleccione una opcion valida, creo que no es necesaria debido al do-while en la funcion readOption... Pero lo dejo por si acaso
+                System.out.println("Opcion no valida");
+            }
         }
         }
     }
@@ -50,22 +60,57 @@ public class Main {
         System.out.print("Selecciona una opcion: ");
     }
 
-    public static void crearMatrizCartas() {
+    public static String[][] crearMatrizCartas() {
+        String cartas[][] = new String[12][2]; //[Filas] [Columnas]
+        cartas = inicializarCartasJuego(cartas);
+        return cartas;
     }
 
-    public static void agregarCartas(){
+    public static String[][] agregarCartas(String cartas[][]){
+        cartas[0][0] = "Carta A";
+        cartas[1][0] = "Carta 2";
+        cartas[2][0] = "Carta 3";
+        cartas[3][0] = "Carta 4";
+        cartas[4][0] = "Carta 5";
+        cartas[5][0] = "Carta 6";
+        cartas[6][0] = "Carta 7";
+        cartas[7][0] = "Carta 8";
+        cartas[8][0] = "Carta 9";
+        cartas[9][0] = "Carta J";
+        cartas[10][0] = "Carta Q";
+        cartas[11][0] = "Carta K";
+        for (int i = 0; i < 12; i++) {
+            if (i == 0){
+                cartas[i][1] = "11";
+            }
+            if ( i > 0 && i < 9) {
+                String valor = Integer.toString(i + 1);
+                cartas[i][1] = valor;
+            }
+            if (i >= 9){
+                cartas[i][1] = "10";
+            }
 
+        }
+        return cartas;
     }
 
-    public static void inicializarCartasJuego() {
-
+    public static String[][] inicializarCartasJuego(String cartas[][]) {
+        cartas = agregarCartas(cartas);
+        return cartas;
     }
 
-    public static void obtenerCartas(){
-
+    public static int obtenerCartas(String cartas[][]){
+        Random random = new Random();
+        int puntaje = 0;
+        for (int i = 0; i < 2; i++) {
+            int numeroRandom = random.nextInt(12);
+            puntaje = puntaje + Integer.parseInt(cartas[numeroRandom][1]);
+        }
+        return puntaje;
     }
 
-    public static void jugar(){
+    public static void jugar(String cartas[][]){
 
     }
 
@@ -73,5 +118,10 @@ public class Main {
         return false;
     }
 
-
+    /*public static void mostrarCartas(String cartas[][]){
+        for (int i = 0; i < 12; i++) {
+            System.out.print(cartas[i][0]);
+            System.out.println(cartas[i][1]);
+            }
+    }*/
 }
