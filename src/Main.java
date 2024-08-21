@@ -116,7 +116,7 @@ public class Main {
         System.out.println("Puntaje del jugador 1: " + puntajeUno);
         System.out.println("Puntaje del jugador 2: " + puntajeDos);
         comprobacionVictoria(puntajeUno, puntajeDos);
-        }
+    }
 
     public static void comprobacionVictoria(int puntajeUno, int puntajeDos){
         if (puntajeUno == 20){
@@ -140,7 +140,7 @@ public class Main {
                 System.out.println("Ha ganado el jugador 2");
             }
         }
-        }
+    }
 
     public static boolean salir(){
         System.out.println("Gracias por jugar c:");
