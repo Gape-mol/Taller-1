@@ -16,23 +16,22 @@ public class Main {
         //mostrarCartas(cartas);
         boolean continuar = true;
         while(continuar){
-        printMenu(); //Primero se imprime el menu
-        int opcion = readOption(); //Se declara una variable de tipo int, y se iguala a la funcion readOption
-        System.out.println(opcion);
-        switch (opcion) { //Utilizo un switch para las opciones
-            case 1: {
-                jugar(cartas);
-                break;
+            printMenu(); //Primero se imprime el menu
+            int opcion = readOption(); //Se declara una variable de tipo int, y se iguala a la funcion readOption
+            switch (opcion) { //Utilizo un switch para las opciones
+                case 1: {
+                    jugar(cartas);
+                    break;
+                }
+                case 2: {
+                    continuar = salir();
+                    break;
+                }
+                default: { //En caso de que no se seleccione una opcion valida, creo que no es necesaria debido al do-while en la funcion readOption... Pero lo dejo por si acaso
+                    System.out.println("Opcion no valida");
+                    break;
+                }
             }
-            case 2: {
-                continuar = salir();
-                break;
-            }
-            default: { //En caso de que no se seleccione una opcion valida, creo que no es necesaria debido al do-while en la funcion readOption... Pero lo dejo por si acaso
-                System.out.println("Opcion no valida");
-                break;
-            }
-        }
         }
     }
 
@@ -114,8 +113,12 @@ public class Main {
     public static void jugar(String cartas[][]){
         int puntajeUno = obtenerCartas(cartas);
         int puntajeDos = obtenerCartas(cartas);
-        System.out.println(puntajeUno);
-        System.out.println(puntajeDos);
+        System.out.println("Puntaje del jugador 1: " + puntajeUno);
+        System.out.println("Puntaje del jugador 2: " + puntajeDos);
+        comprobacionVictoria(puntajeUno, puntajeDos);
+        }
+
+    public static void comprobacionVictoria(int puntajeUno, int puntajeDos){
         if (puntajeUno == 20){
             System.out.println("Ha ganado el jugador 1");
         }
@@ -128,17 +131,16 @@ public class Main {
         if (puntajeDos > 20) {
             System.out.println("Ha ganado el jugador 1");
         }
-        if (puntajeUno < 20 && puntajeDos < 20){
-            if (puntajeUno == puntajeDos){
+        if (puntajeUno < 20 && puntajeDos < 20) {
+            if (puntajeUno == puntajeDos) {
                 System.out.println("Ha sido un empate");
-            }
-            else if (puntajeUno > puntajeDos) {
+            } else if (puntajeUno > puntajeDos) {
                 System.out.println("Ha ganado el jugador 1");
             } else {
                 System.out.println("Ha ganado el jugador 2");
             }
         }
-    }
+        }
 
     public static boolean salir(){
         System.out.println("Gracias por jugar c:");
