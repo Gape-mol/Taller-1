@@ -18,6 +18,7 @@ public class Main {
         while(continuar){
         printMenu(); //Primero se imprime el menu
         int opcion = readOption(); //Se declara una variable de tipo int, y se iguala a la funcion readOption
+        System.out.println(opcion);
         switch (opcion) { //Utilizo un switch para las opciones
             case 1: {
                 jugar(cartas);
@@ -29,6 +30,7 @@ public class Main {
             }
             default: { //En caso de que no se seleccione una opcion valida, creo que no es necesaria debido al do-while en la funcion readOption... Pero lo dejo por si acaso
                 System.out.println("Opcion no valida");
+                break;
             }
         }
         }
@@ -49,7 +51,6 @@ public class Main {
                 System.out.print("Selecciona una opcion: ");
             }
         } while (opcion < 1 || opcion > 2);
-        scanner.close(); //Se cierra el objeto de tipo Scanner
         return opcion; //Se retorna la opcion seleccionada por el usuario
     }
 
@@ -111,14 +112,41 @@ public class Main {
     }
 
     public static void jugar(String cartas[][]){
-
+        int puntajeUno = obtenerCartas(cartas);
+        int puntajeDos = obtenerCartas(cartas);
+        System.out.println(puntajeUno);
+        System.out.println(puntajeDos);
+        if (puntajeUno == 20){
+            System.out.println("Ha ganado el jugador 1");
+        }
+        if (puntajeDos == 20) {
+            System.out.println("Ha ganado el jugador 2");
+        }
+        if (puntajeUno > 20) {
+            System.out.println("Ha ganado el jugador 2");
+        }
+        if (puntajeDos > 20) {
+            System.out.println("Ha ganado el jugador 1");
+        }
+        if (puntajeUno < 20 && puntajeDos < 20){
+            if (puntajeUno == puntajeDos){
+                System.out.println("Ha sido un empate");
+            }
+            else if (puntajeUno > puntajeDos) {
+                System.out.println("Ha ganado el jugador 1");
+            } else {
+                System.out.println("Ha ganado el jugador 2");
+            }
+        }
     }
 
     public static boolean salir(){
+        System.out.println("Gracias por jugar c:");
         return false;
     }
 
-    /*public static void mostrarCartas(String cartas[][]){
+    /* Esta funcion de aqui, la cree durante el desarrollo del codigo para poder ver si la matriz se creaba correctamente
+    public static void mostrarCartas(String cartas[][]){
         for (int i = 0; i < 12; i++) {
             System.out.print(cartas[i][0]);
             System.out.println(cartas[i][1]);
